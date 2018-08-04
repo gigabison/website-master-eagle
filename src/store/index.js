@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import userStore from './modules/user'
-import * as config from '../config'
+import * as config from '../../config'
 
 Vue.prototype.$config = config
 Vue.use(Vuex)

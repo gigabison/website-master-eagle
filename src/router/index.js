@@ -10,7 +10,7 @@ const Premium = () => import('@/components/Premium')
 
 Vue.use(Router)
 
-import * as config from '../config'
+import * as config from '../../config'
 import { store } from '../store'
 import { CognitoUserPool } from 'amazon-cognito-identity-js'
 import axios from 'axios'

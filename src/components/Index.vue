@@ -1,11 +1,11 @@
 <template>
   <div v-if="userStore.firebaseUser">
-    <h1>Index</h1>
+    <h1 v-if="page">{{page.title}}</h1>
     <p>
       Hello! The last time we saw you sign in was at: {{ userStore.firebaseUser.metadata.lastSignInTime }}
     </p>
-    Loading: {{ loading }}
-    {{ movies }}
+    <!---Loading: {{ loading }}-->
+    {{ page.body }}
     <button @click="logout" class="item">Logout</button>
     <br>
     <router-link :to="{ name: 'Account' }">Account</router-link>
@@ -26,7 +26,7 @@ export default {
   data () {
     return {
       loading: true,
-      movies: []
+      page: null
     }
   },
 
@@ -39,12 +39,11 @@ export default {
   mounted () {
     this.$nextTick(() => {
       let db = firebase.firestore()
-      db.collection('movies')
+      db.collection('pages')
+        .doc('IZtkRWHoYInupmQQ9Y2S')
         .get()
         .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            this.movies.push(doc.data())
-          })
+          this.page = snapshot.data()
         })
         .then(() => {
           this.loading = false

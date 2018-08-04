@@ -3,7 +3,7 @@ import App from './App'
 import VeeValidate from 'vee-validate'
 import router from './router'
 import { store } from './store'
-import * as config from './config'
+import * as config from '../config'
 import axios from 'axios'
 import Raven from 'raven-js'
 import firebase from 'firebase'
@@ -14,12 +14,12 @@ Vue.prototype.$config = config
 Vue.config.productionTip = false
 
 let firebaseConfig = {
-  apiKey: config.FirebaseApiKey,
-  authDomain: config.FirebaseAuthDomain,
-  databaseURL: config.FirebaseDatabaseUrl,
-  projectId: config.FirebaseProjectId,
-  storageBucket: config.FirebaseStorageBucket,
-  messagingSenderId: config.FirebaseMessageSenderId
+    apiKey: "AIzaSyAdSSAVPMxavyiq5hfwVoAiGQaStE6r9Ok",
+    authDomain: "eng-lang.firebaseapp.com",
+    databaseURL: "https://eng-lang.firebaseio.com",
+    projectId: "eng-lang",
+    storageBucket: "eng-lang.appspot.com",
+    messagingSenderId: "285268393252",
 }
 
 firebase.initializeApp(firebaseConfig)
