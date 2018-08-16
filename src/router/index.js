@@ -2,24 +2,37 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase'
 
-const Index = () => import('@/components/Index')
-const Login = () => import('@/components/Auth/Login')
-const Register = () => import('@/components/Auth/Register')
-const Account = () => import('@/components/Account')
-const Premium = () => import('@/components/Premium')
-const EditMenu = () => import('@/components/EditMenu')
+const Index = () =>
+  import ('@/components/Index')
+const Login = () =>
+  import ('@/components/Auth/Login')
+const PublicPage = () =>
+  import ('@/components/PublicPage')
+const EditPage = () =>
+  import ('@/components/EditPage')
+const Register = () =>
+  import ('@/components/Auth/Register')
+const Account = () =>
+  import ('@/components/Account')
+const Premium = () =>
+  import ('@/components/Premium')
+const EditMenu = () =>
+  import ('@/components/EditMenu')
 
 Vue.use(Router)
 
 import * as config from '../../config'
-import { store } from '../store'
-import { CognitoUserPool } from 'amazon-cognito-identity-js'
+import {
+  store
+} from '../store'
+import {
+  CognitoUserPool
+} from 'amazon-cognito-identity-js'
 import axios from 'axios'
 
 const router = new Router({
   mode: 'history',
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'Index',
       component: Index,
@@ -36,6 +49,22 @@ const router = new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/page/:id/edit',
+      name: 'EditPage',
+      component: EditPage,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/page/:id',
+      name: 'PublicPage',
+      component: PublicPage,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/account',
@@ -64,10 +93,10 @@ router.beforeEach((to, from, next) => {
     next({
       name: 'Login'
     })
-  } else if (!requiresAuth && currentUser) {
-    next({
-      name: 'Index'
-    })
+    // } else if (!requiresAuth && currentUser) {
+    //   next({
+    //     name: 'Index'
+    //   })
   } else {
     next()
   }

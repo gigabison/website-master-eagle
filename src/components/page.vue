@@ -8,20 +8,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import axios from 'axios'
-import firebase from 'firebase'
-import 'firebase/firestore'
+import { mapState } from "vuex";
+import axios from "axios";
+import firebase from "firebase";
+import "firebase/firestore";
 
 export default {
-  name: 'Page',
-  props: ['pageID'],
-  data () {
+  name: "Page",
+  props: ["pageId", "samplePage"],
+  data() {
     return {
       loading: true,
-      title: 'Loading...',
-      body: 'Loading...'
-    }
+      title: "Loading...",
+      body: "Loading..."
+    };
   },
 
   computed: {
@@ -30,29 +30,48 @@ export default {
     })
   },
 
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
-      let db = firebase.firestore()
-      db.collection('pages')
-        .doc(this.$props.pageID)
-        .get()
-        .then((snapshot) => {
-          this.title = snapshot.get('title')
-          this.body = snapshot.get('body')          
-        })
-        .then(() => {
-          this.loading = false
-        })
-        .catch((err) => {
-          console.error(err.message)
-        })
-    })
+      let id = this.$props.pageId;
+      if (id != null) {
+        this.loadPageFromId(id);
+      } else {
+        let data = this.$props.samplePage;
+        if (data == null) {
+          data = {
+            title: "Page not found",
+            body: "Page not found"
+          };
+          this.loadPageFromData(data);
+        }
+      }
+    });
   },
 
   methods: {
-    
+    loadPageFromId(id) {
+      let db = firebase.firestore();
+      db
+        .collection("pages")
+        .doc(id)
+        .get()
+        .then(snapshot => {
+          this.title = snapshot.get("title");
+          this.body = snapshot.get("body");
+        })
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(err => {
+          console.error(err.message);
+        });
+    },
+    loadPageFromData(data) {
+      this.title = data.title;
+      this.body = data.body;
+    }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -63,24 +82,23 @@ export default {
   bottom: 0;
   left: 0;
   width: 800px;
-  background-color: #f3f3f3; 
+  background-color: #f3f3f3;
 }
 
 h1 {
-    font-family: 'Oxygen', sans-serif;
-    font-size: 25px;  
-    text-align: center;  
-    padding: 10px;
-    margin-bottom: 0;
-    background-color: rgb(170, 214, 141);
-}    
-
-p {
-    font-family: 'Oxygen', sans-serif;
-    font-size: 18px; 
-    margin: 10px 10px;
-    text-align: justify;
+  font-family: "Oxygen", sans-serif;
+  font-size: 25px;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 0;
+  background-color: rgb(170, 214, 141);
 }
 
+p {
+  font-family: "Oxygen", sans-serif;
+  font-size: 18px;
+  margin: 10px 10px;
+  text-align: justify;
+}
 </style>
 
