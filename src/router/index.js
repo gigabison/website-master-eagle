@@ -7,10 +7,11 @@ const Login = () => import('@/components/Auth/Login')
 const Register = () => import('@/components/Auth/Register')
 const Account = () => import('@/components/Account')
 const Premium = () => import('@/components/Premium')
+const EditMenu = () => import('@/components/EditMenu')
 
 Vue.use(Router)
 
-import * as config from '../config'
+import * as config from '../../config'
 import { store } from '../store'
 import { CognitoUserPool } from 'amazon-cognito-identity-js'
 import axios from 'axios'
@@ -45,9 +46,9 @@ const router = new Router({
       }
     },
     {
-      path: '/premium',
-      name: 'Premium',
-      component: Premium,
+      path: '/editmenu',
+      name: 'Edit Menu',
+      component: EditMenu,
       meta: {
         requiresAuth: true
       }

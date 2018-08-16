@@ -1,8 +1,8 @@
 {
-  "name": "moviesurf-web",
-  "version": "4.0.0",
-  "description": "MovieSurf.io version four",
-  "author": "",
+  "name": "eng-lang-project",
+  "version": "0.0.0",
+  "description": "eng-lang",
+  "author": "Nick and Irina",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -14,6 +14,7 @@
     "aws-sdk": "^2.177.0",
     "axios": "^0.17.1",
     "firebase": "^4.12.1",
+    "npm": "^6.3.0",
     "raven-js": "^3.22.1",
     "vee-validate": "^2.0.0",
     "vue": "^2.5.2",

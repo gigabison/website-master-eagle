@@ -1,15 +1,6 @@
 <template>
   <div v-if="userStore.firebaseUser">    
-    <page pageID='IZtkRWHoYInupmQQ9Y2S'></page>
-
-    Loading: {{ loading }}
-    {{ page }}
-    <button @click="logout" class="item">Logout</button>
-    <br>
-    <router-link :to="{ name: 'Account' }">Account</router-link>
-  </div>
-  <div v-else>
-    Loading...
+    <p>Hello, world!</p>
   </div>
 </template>
 
