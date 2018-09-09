@@ -19,10 +19,7 @@
         </ul>
         <input type='text' class='title' v-model="title">
         <vue-editor v-model="content"></vue-editor>
-        <br>
-        <button v-on:click="savePage">Save Page</button>
   </section>
-  <br>
   </div>
 </template>
 
