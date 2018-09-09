@@ -34,7 +34,11 @@ export default {
     this.pageId = this.$route.params.id;
   },
 
-  methods: {}
+  methods: {
+    editPage() {
+      this.$router.push({ name: "EditPage", params: { id: this.pageId } });
+    }
+  }
 };
 </script>
 

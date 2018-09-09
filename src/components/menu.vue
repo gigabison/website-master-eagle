@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="userStore.firebaseUser">
+        <button @click="editMenu">Edit Menu</button>
+    </div>
     <ul class="menuUl">
       <li v-for="(menuPage, index) in menuPages" :key="index" class="menuLi menuActive">
         <a class="menuText active" :href="menuPage.link">{{menuPage.menuItem}}</a>
@@ -61,7 +64,11 @@ export default {
     });
   },
 
-  methods: {}
+  methods: {
+    editMenu() {
+      this.$router.push({ name: "EditMenu" });
+    }
+  }
 };
 </script>
 

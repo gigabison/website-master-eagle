@@ -11,8 +11,7 @@
       <p>Nick is hot</p>
       <div v-if="userStore.firebaseUser">
         <button @click="logout2" class="item">Logout</button>
-        <br>
-        <router-link :to="{ name: 'Account' }">Account</router-link>
+        <button @click="account" class="item">Account</button>
       </div>
     </footer>
   </div>
@@ -44,6 +43,9 @@ export default {
         .then(() => {
           this.$router.push({ name: "Index" });
         });
+    },
+    async account() {
+      this.$router.push({ name: "Account" });
     }
   }
 };

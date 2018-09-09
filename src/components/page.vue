@@ -1,9 +1,13 @@
 <template>
   <div>
+   
    <section class="introSection">
-        <h1>{{title}}</h1>
-        <div>{{body}}</div>
-        </section>
+      <div v-if="userStore.firebaseUser">
+        <button @click="editPage">Edit Page</button>
+      </div>
+      <h1>{{title}}</h1>
+      <div>{{body}}</div>
+  </section>
   </div>
 </template>
 
@@ -69,6 +73,9 @@ export default {
     loadPageFromData(data) {
       this.title = data.title;
       this.body = data.body;
+    },
+    editPage() {
+      this.$router.push({ name: "EditPage", params: { id: this.pageId } });
     }
   }
 };
