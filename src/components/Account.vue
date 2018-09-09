@@ -1,22 +1,23 @@
 <template>
   <div v-if="userStore.firebaseUser">
     <h1>Account</h1>
-    <h3>Profile</h3>
-    <br>
-    <router-link :to="{ name: 'Index' }">Index</router-link>
+    <h3>UID </h3>
+    <h4>{{userStore.firebaseUser.uid}}</h4>
+    <h3>displayName </h3>
+    <h4>{{userStore.firebaseUser.displayName}}</h4>
+    <h3>email</h3>
+    <h4>{{userStore.firebaseUser.email}}</h4>
   </div>
 </template>
 
 <script>
-import firebase from 'vuex'
-import { mapState } from 'vuex'
+import firebase from "vuex";
+import { mapState } from "vuex";
 
 export default {
-  name: 'Account',
-  data () {
-    return {
-      
-    }
+  name: "Account",
+  data() {
+    return {};
   },
 
   computed: {
@@ -25,23 +26,21 @@ export default {
     })
   },
 
-  mounted () {
+  mounted() {
     const dict = {
       custom: {
         newPassword: {
-          required: 'The new password field is required.'
+          required: "The new password field is required."
         },
         confirmNewPassword: {
-          required: 'Please confirm your new password.',
-          is: 'Your passwords must match.'
+          required: "Please confirm your new password.",
+          is: "Your passwords must match."
         }
       }
-    }
-    this.$validator.localize('en', dict)
+    };
+    this.$validator.localize("en", dict);
   },
 
-  methods: {
-    
-  }
-}
+  methods: {}
+};
 </script>
