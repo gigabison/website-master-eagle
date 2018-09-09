@@ -53,6 +53,7 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Arsenal|Coming+Soon|Fredericka+the+Great|Oxygen");
+@import "assets/css/quill.bubble.css";
 
 .fixedHeader {
   background-color: rgb(170, 214, 141);

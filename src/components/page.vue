@@ -11,8 +11,12 @@
       </div>
       
       <h1>{{title}}</h1>
-      <div>{{body}}</div>
+      <div class="ql-editor">
+        <div v-html="body"></div>
+      </div>
+      
   </section>
+  
   </div>
 </template>
 
@@ -21,6 +25,7 @@ import { mapState } from "vuex";
 import axios from "axios";
 import firebase from "firebase";
 import "firebase/firestore";
+import { VueEditor, Quill } from "vue2-editor";
 
 export default {
   name: "Page",
@@ -86,7 +91,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .introSection {
   margin: auto;
   top: 0;
@@ -97,7 +102,7 @@ export default {
   background-color: #f3f3f3;
 }
 
-h1 {
+.introSection h1 {
   font-family: "Oxygen", sans-serif;
   font-size: 25px;
   text-align: center;
@@ -107,19 +112,19 @@ h1 {
   background-color: rgb(170, 214, 141);
 }
 
-ul.editPageList {
+.introSection ul.editPageList {
   list-style: none;
   padding: 5px 10px;
   margin: 0;
 }
 
-li.editPageItem {
+.introSection li.editPageItem {
   display: inline-block;
   border: 3px;
   border-color: black;
 }
 
-p {
+.introSection p {
   font-family: "Oxygen", sans-serif;
   font-size: 18px;
   margin: 10px 10px;
