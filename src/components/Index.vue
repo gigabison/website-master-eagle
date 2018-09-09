@@ -1,31 +1,22 @@
 <template>
-  <div v-if="userStore.firebaseUser">    
-    <page pageID='IZtkRWHoYInupmQQ9Y2S'></page>
-
-    Loading: {{ loading }}
-    {{ page }}
-    <button @click="logout" class="item">Logout</button>
-    <br>
-    <router-link :to="{ name: 'Account' }">Account</router-link>
-  </div>
-  <div v-else>
-    Loading...
+  <div>    
+    <page pageId='McE98bnRIbPziXAdIljK'></page>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import axios from 'axios'
-import firebase from 'firebase'
-import 'firebase/firestore'
+import { mapState } from "vuex";
+import axios from "axios";
+import firebase from "firebase";
+import "firebase/firestore";
 
 export default {
-  name: 'Index',
-  data () {
+  name: "Index",
+  data() {
     return {
       loading: true,
       page: []
-    }
+    };
   },
 
   computed: {
@@ -34,17 +25,10 @@ export default {
     })
   },
 
-  mounted () {
-    this.$nextTick(() => {
-    })
+  mounted() {
+    this.$nextTick(() => {});
   },
 
-  methods: {
-    async logout () {
-      firebase.auth().signOut().then(() => {
-        this.$router.push({ name: 'Login' })
-      })
-    }
-  }
-}
+  methods: {}
+};
 </script>

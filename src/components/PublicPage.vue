@@ -1,7 +1,6 @@
 <template>
   <div>
     <page v-if='pageId' :pageId='pageId'></page>
-    <br>
   </div>
 </template>
 

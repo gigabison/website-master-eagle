@@ -37,7 +37,7 @@ const router = new Router({
       name: 'Index',
       component: Index,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -63,7 +63,7 @@ const router = new Router({
       name: 'PublicPage',
       component: PublicPage,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
