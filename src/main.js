@@ -2,7 +2,9 @@ import Vue from 'vue'
 import App from './App'
 import VeeValidate from 'vee-validate'
 import router from './router'
-import { store } from './store'
+import {
+  store
+} from './store'
 import * as config from '../config'
 import axios from 'axios'
 import Raven from 'raven-js'
@@ -11,6 +13,8 @@ import firebase from 'firebase'
 //custom components
 import Page from './components/Page'
 import Menu from './components/Menu'
+import VueEditor from "vue2-editor";
+
 
 import './assets/css/application.scss'
 
@@ -27,8 +31,9 @@ let firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig)
-Vue.component('page',Page)
-Vue.component('menu-system',Menu)
+Vue.component('page', Page)
+Vue.component('menu-system', Menu)
+Vue.use(VueEditor)
 Vue.use(VeeValidate)
 
 axios.interceptors.response.use(function (response) {
@@ -57,8 +62,10 @@ firebase.auth().onAuthStateChanged(function (user) {
     store,
     router,
     template: '<App/>',
-    components: { App },
-    mounted () {
+    components: {
+      App
+    },
+    mounted() {
       this.$nextTick(() => {
         store.commit('SET_FIREBASE_USER', user)
       })

@@ -3,8 +3,13 @@
    
    <section class="introSection">
       <div v-if="userStore.firebaseUser">
-        <button @click="editPage">Edit Page</button>
+         <ul class='editPageList'> 
+          <li class='editPageItem'>
+            <button @click="editPage">Edit Page</button>
+          </li>
+        </ul>
       </div>
+      
       <h1>{{title}}</h1>
       <div>{{body}}</div>
   </section>
@@ -97,8 +102,21 @@ h1 {
   font-size: 25px;
   text-align: center;
   padding: 10px;
-  margin-bottom: 0;
+  margin-bottom: 0px;
+  margin-top: 0px;
   background-color: rgb(170, 214, 141);
+}
+
+ul.editPageList {
+  list-style: none;
+  padding: 5px 10px;
+  margin: 0;
+}
+
+li.editPageItem {
+  display: inline-block;
+  border: 3px;
+  border-color: black;
 }
 
 p {

@@ -1,15 +1,24 @@
 <template>
   <div>
    <section class="introSection">
-        <h1> Edit Page </h1>
-        <h2>Title</h2>
-        <input type='text' v-model="title">
-        <h2>Category</h2>
-        <input type='text' v-model="category">
-        <h2>Body</h2>
-        <textarea v-model="body" cols="40" rows="5"></textarea>
-        <p>{{message}}</p>
-        <label><input type="checkbox" v-model="saveAsNewPage"> Save as new page </label>
+        <ul class='editPageList'> 
+          <li class='editPageItem'>
+             <label for="newPage">Save as new page</label>
+            <input id='newPage' type="checkbox" v-model="saveAsNewPage">
+          </li>
+          <li class='editPageItem'>
+            <label for="category">Category</label>
+            <input id='category' type='text' v-model="category">
+          </li>
+          <li class='editPageItem'>
+            <button v-on:click="savePage">Save Page</button>
+          </li>
+          <li class='editPageItem'>
+            <p>{{message}}</p>
+          </li>
+        </ul>
+        <input type='text' class='title' v-model="title">
+        <vue-editor v-model="content"></vue-editor>
         <br>
         <button v-on:click="savePage">Save Page</button>
   </section>
@@ -22,6 +31,7 @@ import { mapState } from "vuex";
 import axios from "axios";
 import firebase from "firebase";
 import "firebase/firestore";
+import { VueEditor } from "vue2-editor";
 
 export default {
   name: "EditPage",
@@ -30,10 +40,10 @@ export default {
       loading: true,
       pageId: null,
       title: "Loading...",
-      body: "Loading...",
       category: "Loading...",
       saveAsNewPage: false,
-      message: ""
+      message: "",
+      content: "Loading..."
     };
   },
 
@@ -59,7 +69,7 @@ export default {
         .get()
         .then(snapshot => {
           this.title = snapshot.get("title");
-          this.body = snapshot.get("body");
+          this.content = snapshot.get("body");
           this.category = snapshot.get("category");
         })
         .then(() => {
@@ -79,9 +89,9 @@ export default {
         return;
       }
 
-      if (this.body == "") {
+      if (this.content == "") {
         this.message =
-          "Error: you need to enter a non empty page body, silly :) ";
+          "Error: you need to enter a non empty page content, silly :) ";
         return;
       }
 
@@ -89,7 +99,7 @@ export default {
       let pageData = {
         title: this.title,
         category: this.category,
-        body: this.body
+        body: this.content
       };
       let promise = null;
       if (this.saveAsNewPage) {
@@ -145,6 +155,32 @@ h1 {
   padding: 10px;
   margin-bottom: 0;
   background-color: rgb(230, 23, 23);
+}
+
+input.title {
+  font-family: "Oxygen", sans-serif;
+  font-size: 25px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border: 0px;
+  margin-bottom: 0;
+  background-color: rgb(170, 214, 141);
+  width: 100%;
+}
+
+ul.editPageList {
+  list-style: none;
+  padding: 5px 10px;
+  margin: 0;
+}
+
+li.editPageItem {
+  display: inline-block;
+  border: 3px;
+  border-color: black;
 }
 
 p {
