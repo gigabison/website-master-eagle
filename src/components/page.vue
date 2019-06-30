@@ -98,7 +98,6 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  width: 800px;
   background-color: #f3f3f3;
 }
 
@@ -109,7 +108,7 @@ export default {
   padding: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
-  background-color: rgb(170, 214, 141);
+  background-color: white;
 }
 
 .introSection ul.editPageList {

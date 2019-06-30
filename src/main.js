@@ -21,13 +21,14 @@ import './assets/css/application.scss'
 Vue.prototype.$config = config
 Vue.config.productionTip = false
 
-let firebaseConfig = {
-  apiKey: "AIzaSyAdSSAVPMxavyiq5hfwVoAiGQaStE6r9Ok",
-  authDomain: "eng-lang.firebaseapp.com",
-  databaseURL: "https://eng-lang.firebaseio.com",
-  projectId: "eng-lang",
-  storageBucket: "eng-lang.appspot.com",
-  messagingSenderId: "285268393252"
+const firebaseConfig = {
+  apiKey: "AIzaSyDHJGvvSClzQDSU-e37uExidLDIiK0wEdY",
+  authDomain: "website-eagle.firebaseapp.com",
+  databaseURL: "https://website-eagle.firebaseio.com",
+  projectId: "website-eagle",
+  storageBucket: "website-eagle.appspot.com",
+  messagingSenderId: "858225070468",
+  appId: "1:858225070468:web:914cd335bfbeb9d9"
 };
 
 firebase.initializeApp(firebaseConfig)

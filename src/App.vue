@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <header class="fixedHeader">
-     <h1 class = "h1FixedHeader">EngLang</h1>
-     <h2 class = "h2FixedHeader">All you’ve ever wanted to know about English &amp; more</h2>
+     <h1 class = "h1FixedHeader">Gigabison</h1>
+     <h2 class = "h2FixedHeader">We make games</h2>
     </header>
-    <menu-system menuID='main'></menu-system>
+    <menu-system menuId='main'></menu-system>
     <router-view/>
     <br>
     <footer>
-      <p>Nick is hot</p>
+      <h2 class = "h2FixedHeader">nick@gigabison.com</h2>
       <div v-if="userStore.firebaseUser">
-        <button @click="logout2" class="item">Logout</button>
+        <button @click="logout" class="item">Logout</button>
         <button @click="account" class="item">Account</button>
       </div>
     </footer>
@@ -31,12 +31,7 @@ export default {
   },
 
   methods: {
-    logout1() {
-      this.$store.dispatch("logout").then(() => {
-        this.$router.push({ name: "Login" });
-      });
-    },
-    async logout2() {
+    async logout() {
       firebase
         .auth()
         .signOut()
@@ -46,7 +41,11 @@ export default {
     },
     async account() {
       this.$router.push({ name: "Account" });
+    },
+    async login() {
+      this.$router.push({ name: "Login" });
     }
+
   }
 };
 </script>
@@ -55,31 +54,35 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Arsenal|Coming+Soon|Fredericka+the+Great|Oxygen");
 @import "assets/css/quill.bubble.css";
 
+body{
+  margin: 0px;
+}
+
 .fixedHeader {
-  background-color: rgb(170, 214, 141);
+  background-color: white;
   padding: 5px;
   text-align: center;
   color: white;
 }
 
 .h1FixedHeader {
-  font-family: "Oxygen", sans-serif;
+  font-family: "Nunito", sans-serif;
   margin: 0px;
   padding: 0px;
   font-size: 35px;
-  text-shadow: 4px 3px rgb(92, 92, 92);
+  color:  #233D4D;
 }
 
 .h2FixedHeader {
-  font-family: "Oxygen", sans-serif;
+  font-family: "Nunito", sans-serif;
   margin: 0px;
   padding: 0px;
-  font-size: 30px;
-  text-shadow: 3px 2px rgb(114, 114, 114);
+  font-size: 20px;
+  color:  #233D4D;
 }
 
 footer {
-  background-color: rgb(170, 214, 141);
+  background-color: #FCCA46;
   padding: 10px;
   text-align: center;
   color: white;

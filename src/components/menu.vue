@@ -1,12 +1,22 @@
 <template>
   <div>
-    <div v-if="userStore.firebaseUser">
-        <button @click="editMenu">Edit Menu</button>
-    </div>
     <ul class="menuUl">
-      <li v-for="(menuPage, index) in menuPages" :key="index" class="menuLi menuActive">
-        <a class="menuText active" :href="menuPage.link">{{menuPage.menuItem}}</a>
+      <li  v-if="userStore.firebaseUser" class="menuLi menuActive">
+          <button v-if= "editMode" class="menuText active" @click="editMenu">Save Menu</button>
+          <button v-else class="menuText active" @click="editMenu">Edit Menu</button>
       </li>
+      <li v-for="(menuPage, index) in menuPages" :key="index" class="menuLi menuActive">
+          <ul  v-if="editMode" class="editMenuUl">
+            <li>  
+              <input id='title' type="text" v-model="menuPage.title">
+            </li>
+            <li>  
+              <input id='link' type="text" v-model="menuPage.link">
+            </li>
+          </ul>
+        <a v-else class="menuText active" :href="menuPage.link">{{menuPage.title}}</a>
+      </li>
+      
     </ul>
   </div>
 </template>
@@ -19,11 +29,12 @@ import "firebase/firestore";
 
 export default {
   name: "Menu",
-  props: ["menuID"],
+  props: ["menuId"],
   data() {
     return {
       loading: true,
-      menuPages: []
+      menuPages: [],
+      editMode: false
     };
   },
 
@@ -38,22 +49,19 @@ export default {
       let db = firebase.firestore();
       db
         .collection("menus")
-        .doc(this.$props.menuID)
+        .doc(this.$props.menuId)
         .get()
         .then(snapshot => {
           let fbMenuPages = snapshot.get("pages");
           let newMenu = [];
+          console.log(fbMenuPages)
           fbMenuPages.forEach(function(fbMenuPage) {
-            let menuItem = fbMenuPage["menu-item"];
-            let link = fbMenuPage["page-link"];
-            let menuPage = {
-              menuItem: menuItem,
-              link: link
-            };
-            newMenu.push(menuPage);
+
+            let title = fbMenuPage["title"];
+            let link = fbMenuPage["link"];
+            newMenu.push({title,link});
           });
           this.menuPages = newMenu;
-          //console.log(documentData)
         })
         .then(() => {
           this.loading = false;
@@ -66,7 +74,8 @@ export default {
 
   methods: {
     editMenu() {
-      this.$router.push({ name: "EditMenu" });
+      this.editMode = !this.editMode;
+      //this.$router.push({ name: "EditMenu" });
     }
   }
 };
@@ -74,11 +83,13 @@ export default {
 
 <style scoped>
 .menuUl {
+  text-align:center;
   list-style-type: none;
-  padding: 15px;
   overflow: hidden;
   border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+  background-color: #FCCA46;
+  margin: 0px;
+  padding:0px;
 }
 
 .menuLi {
@@ -98,5 +109,16 @@ export default {
 .menuLi:hover {
   background-color: rgb(170, 214, 141);
 }
+
+
+.editMenuUl {
+  list-style-type: none;
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+  display: inline-block;
+}
+
 </style>
 

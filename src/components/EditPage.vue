@@ -7,10 +7,6 @@
             <input id='newPage' type="checkbox" v-model="saveAsNewPage">
           </li>
           <li class='editPageItem'>
-            <label for="category">Category</label>
-            <input id='category' type='text' v-model="category">
-          </li>
-          <li class='editPageItem'>
             <button v-on:click="savePage">Save Page</button>
           </li>
           <li class='editPageItem'>
@@ -37,7 +33,6 @@ export default {
       loading: true,
       pageId: null,
       title: "Loading...",
-      category: "Loading...",
       saveAsNewPage: false,
       message: "",
       content: "Loading..."
@@ -67,7 +62,6 @@ export default {
         .then(snapshot => {
           this.title = snapshot.get("title");
           this.content = snapshot.get("body");
-          this.category = snapshot.get("category");
         })
         .then(() => {
           this.loading = false;
@@ -95,7 +89,6 @@ export default {
       let db = firebase.firestore();
       let pageData = {
         title: this.title,
-        category: this.category,
         body: this.content
       };
       let promise = null;

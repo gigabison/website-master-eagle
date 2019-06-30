@@ -51,6 +51,22 @@ const router = new Router({
       component: Register
     },
     {
+      path: '/account',
+      name: 'Account',
+      component: Account,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/account/edit',
+      name: 'Account',
+      component: Account,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/page/:id/edit',
       name: 'EditPage',
       component: EditPage,
@@ -67,16 +83,8 @@ const router = new Router({
       }
     },
     {
-      path: '/account',
-      name: 'Account',
-      component: Account,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/editmenu',
-      name: 'Edit Menu',
+      path: '/editmenu/:id',
+      name: 'EditMenu',
       component: EditMenu,
       meta: {
         requiresAuth: true
